@@ -1,11 +1,14 @@
-package Mancala;
+
 
 import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+//This is our model class
 public class Game {
+	
+	//Two sets of pits for each player, player 1 represented by pits [0][*] player 2 represented by pits [1][*]
 	private int[][] pits = new int [2][6];
 	private int[][] undoPits = new int[2][];
 	private int [] endPits = new int [2];
