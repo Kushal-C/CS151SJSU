@@ -1,5 +1,4 @@
 
-
 import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
@@ -22,6 +21,10 @@ public class Game {
 	private boolean undoSideHelper = false;
 	private int currentUndoer = 0;
 	
+	/**
+	 * Start of the game placing stones into pits
+	 * @param NumberofStones is the number of stones going to be played
+	 */
 	public Game(int NumberofStones){
 		for(int i = 0; i<2; i++){
 			endPits[i] = 0;
@@ -33,6 +36,11 @@ public class Game {
 		resetAll();
 	}
 
+	/**
+	 * Game method for when a player chooses a pit to move stones
+	 * @param whichPlayer is the current player choosing a pit
+	 * @param pit is the pit chosen to move stones
+	 */
 	public void playGame(int whichPlayer, int pit){
 		if(whichPlayer != currentPlayer){
 			throw new IllegalArgumentException("Wrong players turn.");
@@ -78,6 +86,9 @@ public class Game {
 		endTurn(whichPlayer,pit);
 	}
 
+	/**
+	 * Undo method which updates undo counter and checks logic
+	 */
 	public void undo(){
 		if (getGame()||!undo||(currentPlayer == currentUndoer && !undo)||(undoCounter[currentUndoer] == MaxUndos)){
 			return;
@@ -95,11 +106,20 @@ public class Game {
 		updateAll();
 	}
 
+	/**
+	 * Change listener list
+	 * @param listener to be added
+	 */
 	public void addChangeListener(ChangeListener listener){
 		listenerL.add(listener);
 		updateAll();
 	}
 
+	/**
+	 * Updates the games and moves stones to appropriate pits
+	 * @param whichPlayer is the player ending turn
+	 * @param pit is the pit chosen
+	 */
 	private void endTurn(int whichPlayer, int pit){
 		if (whichPlayer == currentPlayer && pits[whichPlayer][pit] == 1){
 			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][6 - pit - 1];
@@ -114,6 +134,10 @@ public class Game {
 		updateAll();
 	}
 
+	/**
+	 * Checks if all pits are empty to end game
+	 * @return true if pits are empty false if not
+	 */
 	private boolean arePitsEmpty(){
 		int[][] checkPits = pits.clone();
 		int isEmpty;
@@ -132,6 +156,10 @@ public class Game {
 		return false;
 	}
 
+	/**
+	 * Moves remaining stones to appropriate endPits
+	 * @param whichPlayer is the player whose turn the game ended on
+	 */
 	public void endGame(int whichPlayer){
 		isGameOver = true;
 		for(int i = 0; i < 6; i++){
@@ -149,6 +177,11 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Switches between players 
+	 * @param whichPlayer player who ended turn
+	 * @return other player
+	 */
 	public int switchPlayer(int whichPlayer){
 		if(++whichPlayer >= 2){
 			whichPlayer = 0;
@@ -156,12 +189,16 @@ public class Game {
 		return whichPlayer;
 	}
 
+	/**
+	 * resets all pits
+	 */
 	private void resetAll(){
 		undoEndPits = endPits.clone();
 		for (int i = 0; i < 2; i++) {
 			undoPits[i] = pits[i].clone();
 		}
 	}
+
 
 	public void updateAll(){
 		for(ChangeListener listener: listenerL){
@@ -189,4 +226,3 @@ public class Game {
 		return isGameOver;
 	}
 }
-
