@@ -19,7 +19,7 @@ public class Game {
 	private int currentPlayer = 0;
 	private final int MaxUndos = 3;
 	private boolean undo = false;
-	private boolean switchUndoCount = false;
+	private boolean getsFreeTurn = false;
 	private int currentUndoer = 0;
 	
 	/**
@@ -53,9 +53,9 @@ public class Game {
 
 		resetAll();
 
-		if(switchUndoCount == true){
+		if(getsFreeTurn == true){
 			undoCounter[whichPlayer] = 0;
-			switchUndoCount = false;
+			getsFreeTurn = false;
 		}
 		else if (undoCounter[whichPlayer] == 0){
 			undoCounter[switchPlayer(whichPlayer)] = 0;
@@ -77,7 +77,7 @@ public class Game {
 				
 					if(stonesToBeMoved <= 0){
 						arePitsEmpty();
-						switchUndoCount = true;
+						getsFreeTurn = true;
 						updateAll();
 						return;
 					}
@@ -103,7 +103,7 @@ public class Game {
 		}
 
 		undo = false;
-		switchUndoCount = false;
+		getsFreeTurn = false;
 		endPits = undoEndPits.clone();
 		undoCounter[currentUndoer]++;
 		currentPlayer = currentUndoer;
@@ -129,7 +129,7 @@ public class Game {
 			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][6 - pit - 1];
 			pits[whichPlayer][pit] = 0;
 			pits[switchPlayer(whichPlayer)][6 - pit - 1] = 0;
-			switchUndoCount = true;
+			getsFreeTurn = true;
 		}
 		else{
 			currentPlayer = switchPlayer(currentPlayer);
