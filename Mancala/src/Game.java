@@ -1,3 +1,4 @@
+package MancalaGame;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class Game {
 	private int currentPlayer = 0;
 	private final int MaxUndos = 3;
 	private boolean undo = false;
-	private boolean undoSideHelper = false;
+	private boolean switchUndoCount = false;
 	private int currentUndoer = 0;
 	
 	/**
@@ -52,9 +53,9 @@ public class Game {
 
 		resetAll();
 
-		if(undoSideHelper){
+		if(switchUndoCount == true){
 			undoCounter[whichPlayer] = 0;
-			undoSideHelper = false;
+			switchUndoCount = false;
 		}
 		else if (undoCounter[whichPlayer] == 0){
 			undoCounter[switchPlayer(whichPlayer)] = 0;
@@ -62,18 +63,21 @@ public class Game {
 		}
 
 		undo = true;
-		int currentPlayer = pits[whichPlayer][pit];
+		int stonesToBeMoved = pits[whichPlayer][pit];
 		pits[whichPlayer][pit] = 0;
-		while(currentPlayer > 0){
-			pit = ++pit >= 6 ? 0 : pit;
+		while(stonesToBeMoved > 0){
+			if(++pit >= 6)
+				pit = 0;
+			else
+				pit = pit;
 			if(pit == 0){
-				if(whichPlayer == currentPlayer){
-					--currentPlayer;
+				if(whichPlayer == stonesToBeMoved){
+					--stonesToBeMoved;
 					++endPits[whichPlayer];
 				
-					if(currentPlayer <= 0){
+					if(stonesToBeMoved <= 0){
 						arePitsEmpty();
-						undoSideHelper = true;
+						switchUndoCount = true;
 						updateAll();
 						return;
 					}
@@ -81,7 +85,7 @@ public class Game {
 				whichPlayer = switchPlayer(whichPlayer);
 			}
 			++pits[whichPlayer][pit];
-			--currentPlayer;
+			--stonesToBeMoved;
 		}
 		endTurn(whichPlayer,pit);
 	}
@@ -90,7 +94,7 @@ public class Game {
 	 * Undo method which updates undo counter and checks logic
 	 */
 	public void undo(){
-		if (getGame()||!undo||(currentPlayer == currentUndoer && !undo)||(undoCounter[currentUndoer] == MaxUndos)){
+		if (getGame()||undo == false||(currentPlayer == currentUndoer && undo == false)||(undoCounter[currentUndoer] == MaxUndos)){
 			return;
 		}
 
@@ -99,7 +103,7 @@ public class Game {
 		}
 
 		undo = false;
-		undoSideHelper = false;
+		switchUndoCount = false;
 		endPits = undoEndPits.clone();
 		undoCounter[currentUndoer]++;
 		currentPlayer = currentUndoer;
@@ -125,7 +129,7 @@ public class Game {
 			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][6 - pit - 1];
 			pits[whichPlayer][pit] = 0;
 			pits[switchPlayer(whichPlayer)][6 - pit - 1] = 0;
-			undoSideHelper = true;
+			switchUndoCount = true;
 		}
 		else{
 			currentPlayer = switchPlayer(currentPlayer);
