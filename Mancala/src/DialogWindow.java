@@ -7,14 +7,17 @@ import javax.swing.*;
 /**
  * A dialog to allow player to set initial stone count
  * and a board layout to be used for game play
- * @author Team Edward.
  *
  */
 public class DialogWindow extends JDialog
 {
+	Game model;
+	Board b;
+	
 	public DialogWindow() {
 		popup();
 	}
+	
 	public void popup() {
 		JTextField name1 = new JTextField();
 		JTextField name2 = new JTextField();
@@ -27,10 +30,20 @@ public class DialogWindow extends JDialog
 				"Number of Starting Stones (3 or 4): ", numberOfStartingStones,
 				"Enter Theme (Classic or Modern): ", theme
 		};
+		
 		JOptionPane.showConfirmDialog(null, fields, "Game Preferences", JOptionPane.OK_CANCEL_OPTION);
 		String temp = numberOfStartingStones.getText();
 		int s = Integer.parseInt(temp);
-		Game model = new Game(s);
-		Board b = new Board(model);
+		model = new Game(s);
+		b = new Board(model);
 	}
+	
+	public Game getModel() {
+		return model;
+	}
+	
+	public Board getBoard() {
+		return b;
+	}
+	
 }

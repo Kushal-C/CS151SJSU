@@ -7,11 +7,14 @@ public class Controller {
 	public static void main(String[] args)
 	{
 		Controller c = new Controller();
-		
 	}
 
 	public Controller()
 	{
 		d = new DialogWindow();
+		g = d.getModel();
+		b = d.getBoard();
 	}
+	
+	
 }

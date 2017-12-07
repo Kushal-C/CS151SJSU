@@ -1,5 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import java.awt.image.ImageObserver;
 
 //This is our view
@@ -11,6 +16,8 @@ public class Board implements ImageObserver {
     JPanel playerTwoStones;
 
     JPanel pitPanel;
+    
+    Game model;
 
    // TODO:switch from BorderLayout to gridsBagLayout
     public Board(Game model)
@@ -23,6 +30,8 @@ public class Board implements ImageObserver {
         addEndPanels();
         addPits();
         addButtons();
+        
+        this.model = model;
         
         frame.setVisible(true);
     }
@@ -56,7 +65,7 @@ public class Board implements ImageObserver {
         {
             for(int j = 0; j < 6; j++)
             {
-                JPanel pit = new JPanel();
+                Pit pit = new Pit(i,j);
                 pit.setSize(10,10);
                 pit.setBackground(Color.BLUE);
                 
@@ -71,6 +80,38 @@ public class Board implements ImageObserver {
                 pit.add(stonePanel);
                 
                 pitPanel.add(pit);
+                
+                pit.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						model.playGame(pit.getRow(), pit.getCol());
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {
+						//model.playGame(pit.getRow(), pit.getCol());
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+                	
+                });
 
             }
         }
@@ -78,6 +119,9 @@ public class Board implements ImageObserver {
         frame.add(pitPanel,BorderLayout.CENTER);
     }
 
+    /**
+     * Adds buttons to the overlying panel
+     */
     public void addButtons()
     {
     	
@@ -91,12 +135,43 @@ public class Board implements ImageObserver {
     		quit.setMinimumSize(new Dimension(25,25));
     		undo.setMinimumSize(new Dimension(25,25));
     		
-    		
     		buttonPanel.add(play,BorderLayout.WEST);
     		buttonPanel.add(quit, BorderLayout.CENTER);
     		buttonPanel.add(undo, BorderLayout.EAST);
     		
     		frame.add(buttonPanel,BorderLayout.NORTH);
+    		
+    		//Listeners for the buttons
+    		//Call the JOption Pane dialog again and set up new game
+    		play.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					DialogWindow window = new DialogWindow();
+					model = window.getModel();
+					
+				}
+    			
+    		});
+    		
+    		//Quits the game
+    		quit.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				}
+    			
+    		});
+    		
+    		// Calls the undo action on the game logic and reflects the changes on the board
+    		undo.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					model.undo();
+				}
+    			
+    		});
+    		
     	}
     public void addingStonesToPanel() {
     	

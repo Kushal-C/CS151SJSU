@@ -9,6 +9,7 @@ public class Stone extends JPanel{
 	int y; 
 	
 	public Stone() {
+		
 	}
 	
 	protected void paintComponent(Graphics g) {
