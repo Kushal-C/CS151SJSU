@@ -1,8 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 //This is our view
-public class Board {
+public class Board implements ImageObserver {
 
     JFrame frame;
 
@@ -60,11 +61,12 @@ public class Board {
                 pit.setBackground(Color.BLUE);
                 
                 JPanel stonePanel = new JPanel();
-            	Stone stone = new Stone();
-            	stone.setSize(50,50);
-            	stonePanel.add(stone);
-            	stonePanel.add(stone);
-            	stonePanel.add(stone);
+                
+                Stone stone = new Stone();
+            	    stone.setSize(50,50);
+            		stonePanel.add(stone);
+            		stonePanel.add(stone);
+            		stonePanel.add(stone);
             	
                 pit.add(stonePanel);
                 
@@ -99,4 +101,10 @@ public class Board {
     public void addingStonesToPanel() {
     	
     }
+
+	@Override
+	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
