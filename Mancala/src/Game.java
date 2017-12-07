@@ -1,4 +1,4 @@
-package MancalaGame;
+
 
 import java.util.ArrayList;
 
@@ -21,12 +21,13 @@ public class Game {
 	private boolean undo = false;
 	private boolean getsFreeTurn = false;
 	private int currentUndoer = 0;
-	
+	private int startingStones;
 	/**
 	 * Start of the game placing stones into pits
 	 * @param NumberofStones is the number of stones going to be played
 	 */
 	public Game(int NumberofStones){
+		this.startingStones = NumberofStones;
 		for(int i = 0; i<2; i++){
 			endPits[i] = 0;
 			undoCounter[i] = 0;
@@ -228,5 +229,8 @@ public class Game {
 
 	public boolean getGame(){
 		return isGameOver;
+	}
+	public int getStartingStones() {
+		return startingStones;
 	}
 }

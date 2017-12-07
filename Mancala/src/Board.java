@@ -12,7 +12,7 @@ public class Board {
     JPanel pitPanel;
 
    // TODO:switch from BorderLayout to gridsBagLayout
-    public Board()
+    public Board(Game model)
     {
         frame = new JFrame();
         frame.setSize(500,500);
@@ -24,9 +24,6 @@ public class Board {
         addButtons();
         
         frame.setVisible(true);
-        
-
-
     }
 
     public void addEndPanels()
@@ -61,6 +58,16 @@ public class Board {
                 JPanel pit = new JPanel();
                 pit.setSize(10,10);
                 pit.setBackground(Color.BLUE);
+                
+                JPanel stonePanel = new JPanel();
+            	Stone stone = new Stone();
+            	stone.setSize(50,50);
+            	stonePanel.add(stone);
+            	stonePanel.add(stone);
+            	stonePanel.add(stone);
+            	
+                pit.add(stonePanel);
+                
                 pitPanel.add(pit);
 
             }
@@ -89,5 +96,7 @@ public class Board {
     		
     		frame.add(buttonPanel,BorderLayout.NORTH);
     	}
-	
+    public void addingStonesToPanel() {
+    	
+    }
 }
