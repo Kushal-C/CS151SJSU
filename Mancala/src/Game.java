@@ -16,7 +16,7 @@ public class Game {
 	private int [] undoCounter = new int[2];
 	private boolean isGameOver = false;
 	
-//	private ArrayList<ChangeListener> listenerL = new ArrayList<ChangeListener>();
+	
 	private int currentPlayer = 0;
 	private final int MaxUndos = 3;
 	private boolean undo = false;
@@ -82,7 +82,7 @@ public class Game {
 					if(stonesToBeMoved <= 0){
 						arePitsEmpty();
 						getsFreeTurn = true;
-					//	updateAll();
+					
 						return;
 					}
 				} 
@@ -111,16 +111,7 @@ public class Game {
 		endPits = undoEndPits.clone();
 		undoCounter[currentUndoer]++;
 		currentPlayer = currentUndoer;
-//		updateAll();
-	}
 
-	/**
-	 * Change listener list
-	 * @param listener to be added
-	 */
-	public void addChangeListener(ChangeListener listener){
-	//	listenerL.add(listener);
-//		updateAll();
 	}
 
 	/**
@@ -207,13 +198,7 @@ public class Game {
 		}
 	}
 
-/*
-	public void updateAll(){
-		for(ChangeListener listener: listenerL){
-			listener.stateChanged(new ChangeEvent(this));
-		}
-	}
-*/
+
 	public int[][] getPits(){
 		return pits.clone();
 	}

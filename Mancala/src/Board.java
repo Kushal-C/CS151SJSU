@@ -81,7 +81,7 @@ public class Board implements ImageObserver {
 
     public void addPits()
     {
-    	pitPanel.removeAll();
+    		pitPanel.removeAll();
         //Creates an overarching pit panel that holds 12 JPanels within it
         pitPanel.setSize(300,475);
         pitPanel.setLayout(new GridLayout(2,6,5,5));
