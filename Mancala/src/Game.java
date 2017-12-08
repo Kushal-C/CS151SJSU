@@ -70,26 +70,43 @@ public class Game {
 		int stonesToBeMoved = pits[whichPlayer][pit];
 		pits[whichPlayer][pit] = 0;
 		while(stonesToBeMoved > 0){
-			if(++pit >= 6)
-				pit = 0;
-			else
-				pit = pit;
-			if(pit == 0){
-				if(whichPlayer == stonesToBeMoved){
+			if(whichPlayer == 0){
+				if(++pit >= 6){
+					pit = 5;
 					--stonesToBeMoved;
 					++endPits[whichPlayer];
-				
+					
 					if(stonesToBeMoved <= 0){
 						arePitsEmpty();
 						getsFreeTurn = true;
-					
 						return;
-					}
-				} 
-				whichPlayer = switchPlayer(whichPlayer);
+					} 
+					whichPlayer = switchPlayer(whichPlayer);
+				}
+				else
+					pit = pit;
+				++pits[whichPlayer][pit];
+				--stonesToBeMoved;
 			}
-			++pits[whichPlayer][pit];
-			--stonesToBeMoved;
+			else{
+				if(--pit < 0){
+					pit = 0;
+					--stonesToBeMoved;
+					++endPits[whichPlayer];
+					
+					if(stonesToBeMoved <= 0){
+						arePitsEmpty();
+						getsFreeTurn = true;
+						return;
+					} 
+					whichPlayer = switchPlayer(whichPlayer);
+				}
+				else
+					pit = pit;
+				++pits[whichPlayer][pit];
+				--stonesToBeMoved;
+			}
+			
 		}
 		endTurn(whichPlayer,pit);
 	}
