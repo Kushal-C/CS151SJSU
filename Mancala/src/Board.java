@@ -112,7 +112,9 @@ public class Board implements ImageObserver {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						model.playGame(pit.getRow(), pit.getCol());
+		
 						int[][] temp = model.getPits();
+					
 						for(int i = 0; i < 2; i++)
 						{
 							for(int j = 0; j < 6; j++)

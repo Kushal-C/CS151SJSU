@@ -14,6 +14,10 @@ public class DialogWindow extends JDialog
 	Game model;
 	Board b;
 	
+	public static void main(String[] args) {
+		DialogWindow window = new DialogWindow();
+	}
+	
 	public DialogWindow() {
 		popup();
 	}
