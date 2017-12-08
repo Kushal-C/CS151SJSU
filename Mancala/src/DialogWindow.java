@@ -39,9 +39,11 @@ public class DialogWindow extends JDialog
 		String temp = numberOfStartingStones.getText();
 		int s = Integer.parseInt(temp);
 		
+		LayoutTemplate lt = new Classic();
 		String themeTemp = theme.getText();
+		
 		model = new Game(s, themeTemp);
-		b = new Board(model);
+		b = new Board(model, lt);
 	}
 	
 	public Game getModel() {

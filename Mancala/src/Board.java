@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
-import java.awt.image.ImageObserver;
 
 //This is our view
-public class Board implements ImageObserver {
+public class Board extends JPanel{
 
     JFrame frame;
 
@@ -16,18 +15,19 @@ public class Board implements ImageObserver {
     JPanel playerTwoStones;
 
     JPanel pitPanel;
-    
+    Image background;
     Game model;
-
+    LayoutTemplate layout;
    // TODO:switch from BorderLayout to gridsBagLayout
-    public Board(Game model)
+    public Board(Game model, LayoutTemplate lt)
     {
         frame = new JFrame();
         frame.setSize(500,500);
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
         this.model = model;
+        this.layout = lt;
+        background = lt.getImage();
         
         playerOneStones = new JPanel();
         playerTwoStones = new JPanel();
@@ -42,7 +42,7 @@ public class Board implements ImageObserver {
         
         frame.setVisible(true);
     }
-
+  
     public void addEndPanels()
     {
         playerOneStones.removeAll();
@@ -81,7 +81,7 @@ public class Board implements ImageObserver {
 
     public void addPits()
     {
-    		pitPanel.removeAll();
+    	pitPanel.removeAll();
         //Creates an overarching pit panel that holds 12 JPanels within it
         pitPanel.setSize(300,475);
         pitPanel.setLayout(new GridLayout(2,6,5,5));
@@ -98,9 +98,9 @@ public class Board implements ImageObserver {
                 JPanel stonePanel = new JPanel();
                 int [][] tempPits = model.getPits();
                 for (int k = 0; k < tempPits[i][j]; k++) {
-                	Stone stone = new Stone(model);
-            	    stone.setSize(50,50);
-            		stonePanel.add(stone);
+                	layout = new Classic();
+            	    layout.setSize(50,50);
+            		stonePanel.add(layout);
                 }
             	
                 pit.add(stonePanel);
@@ -220,7 +220,6 @@ public class Board implements ImageObserver {
 					}
 					addPits();
 					addEndPanels();
-				}
 				}
     			
     		});

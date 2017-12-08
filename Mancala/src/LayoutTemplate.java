@@ -1,27 +1,10 @@
-import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
+import java.awt.Dimension;
+import java.awt.Image;
 
-public abstract class LayoutTemplate {
-	
-	protected Rectangle2D.Double[][] pitRects;
-	
-	protected int width;
-	protected int height;
-	
-	public LayoutTemplate() {
-		pitRects = new Rectangle2D.Double[2][6];
-	}
-	
-	public abstract void paintBoard(Graphics g, Board board, int [][] pits, int [] stones);
-	
-	public Rectangle2D.Double[][] getPits(){
-		return pitRects; 
-	}
-	
-	public abstract String getLayoutName();
-	
-	public void setSize(int newWidth, int newHeight) {
-		height = newHeight;
-		width = newWidth;
-	}
+import javax.swing.JPanel;
+
+public abstract class LayoutTemplate extends JPanel{
+	public abstract void setBackground();
+	public abstract Image getImage();
+	public abstract Dimension getPreferredSize();
 }
