@@ -208,6 +208,19 @@ public class Board implements ImageObserver {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					model.undo();
+					int[][] temp = model.getPits();
+					
+					for(int i = 0; i < 2; i++)
+					{
+						for(int j = 0; j < 6; j++)
+						{
+							System.out.print(temp[i][j] + " ");
+						}
+						System.out.println();
+					}
+					addPits();
+					addEndPanels();
+				}
 				}
     			
     		});
