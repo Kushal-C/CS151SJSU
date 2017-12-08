@@ -34,7 +34,9 @@ public class DialogWindow extends JDialog
 		JOptionPane.showConfirmDialog(null, fields, "Game Preferences", JOptionPane.OK_CANCEL_OPTION);
 		String temp = numberOfStartingStones.getText();
 		int s = Integer.parseInt(temp);
-		model = new Game(s);
+		
+		String themeTemp = theme.getText();
+		model = new Game(s, themeTemp);
 		b = new Board(model);
 	}
 	

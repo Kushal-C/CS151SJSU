@@ -1,3 +1,5 @@
+import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 
 /**
@@ -15,6 +17,7 @@ public class Pit extends JPanel {
 	{
 		this.row = row;
 		this.col = col;
+		super.setLayout(new GridLayout(3,0));
 	}
 	
 	public int getRow() {

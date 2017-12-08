@@ -23,18 +23,19 @@ public class Game {
 	private boolean getsFreeTurn = false;
 	private int currentUndoer = 0;
 	private int startingStones;
-	
+	private String theme;
 	/**
 	 * Start of the game placing stones into pits
 	 * @param NumberofStones is the number of stones going to be played
 	 */
-	public Game(int NumberofStones){
+	public Game(int NumberofStones, String theme2){
+		this.theme = theme2;
 		this.startingStones = NumberofStones;
 		for(int i = 0; i<2; i++){
 			endPits[i] = 0;
 			undoCounter[i] = 0;
 			for(int j = 0; j < 6; j++){
-				pits[i][j] = NumberofStones;
+				pits[i][j] = startingStones;
 			}
 		}
 		resetAll();
@@ -234,5 +235,8 @@ public class Game {
 	}
 	public int getStartingStones() {
 		return startingStones;
+	}
+	public String getTheme() {
+		return theme;
 	}
 }

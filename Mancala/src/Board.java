@@ -26,12 +26,14 @@ public class Board implements ImageObserver {
         frame.setSize(500,500);
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
+        this.model = model;
+        
         addEndPanels();
         addPits();
         addButtons();
         
-        this.model = model;
+        
         
         frame.setVisible(true);
     }
@@ -40,14 +42,32 @@ public class Board implements ImageObserver {
     {
         playerOneStones = new JPanel();
         playerTwoStones = new JPanel();
+        
+        playerOneStones.setLayout(new GridLayout(0,1));
+        playerTwoStones.setLayout(new GridLayout(0,1));
+        
 
-        playerOneStones.setBackground(Color.CYAN);
-        playerTwoStones.setBackground(Color.CYAN);
+        
+        playerOneStones.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        playerTwoStones.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
        
         playerOneStones.setMinimumSize(new Dimension(100,475));
         playerTwoStones.setMinimumSize(new Dimension(100,475));
-
+   
+        int[] endPits = model.getEndPits();
+        for (int i = 0; i < endPits[0]; i ++) {
+        	Stone stone = new Stone(model);
+    	    stone.setSize(50,50);
+    		playerOneStones.add(stone);
+        }
+        
+        for (int i = 0; i < endPits[1]; i ++) {
+        	Stone stone = new Stone(model);
+    	    stone.setSize(50,50);
+    		playerTwoStones.add(stone);
+        }
+        
         frame.add(playerOneStones,BorderLayout.WEST);
         frame.add(playerTwoStones, BorderLayout.EAST);
        
@@ -67,15 +87,15 @@ public class Board implements ImageObserver {
             {
                 Pit pit = new Pit(i,j);
                 pit.setSize(10,10);
-                pit.setBackground(Color.BLUE);
-                
+                pit.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+               
                 JPanel stonePanel = new JPanel();
-                
-                Stone stone = new Stone();
+                int [][] tempPits = model.getPits();
+                for (int k = 0; k < tempPits[i][j]; k++) {
+                	Stone stone = new Stone(model);
             	    stone.setSize(50,50);
             		stonePanel.add(stone);
-            		stonePanel.add(stone);
-            		stonePanel.add(stone);
+                }
             	
                 pit.add(stonePanel);
                 
