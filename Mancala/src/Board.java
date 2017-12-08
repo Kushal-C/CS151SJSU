@@ -29,20 +29,24 @@ public class Board implements ImageObserver {
         
         this.model = model;
         
+        playerOneStones = new JPanel();
+        playerTwoStones = new JPanel();
+        pitPanel = new JPanel();
+        
+        frame.add(playerOneStones,BorderLayout.WEST);
+        frame.add(playerTwoStones, BorderLayout.EAST);
+        frame.add(pitPanel,BorderLayout.CENTER);
         addEndPanels();
         addPits();
         addButtons();
-        
-        
         
         frame.setVisible(true);
     }
 
     public void addEndPanels()
     {
-        playerOneStones = new JPanel();
-        playerTwoStones = new JPanel();
-        
+        playerOneStones.removeAll();
+        playerTwoStones.removeAll();
         playerOneStones.setLayout(new GridLayout(0,1));
         playerTwoStones.setLayout(new GridLayout(0,1));
         
@@ -67,16 +71,18 @@ public class Board implements ImageObserver {
     	    stone.setSize(50,50);
     		playerTwoStones.add(stone);
         }
-        
-        frame.add(playerOneStones,BorderLayout.WEST);
-        frame.add(playerTwoStones, BorderLayout.EAST);
+		playerOneStones.validate();
+		playerOneStones.repaint();
+		
+		playerTwoStones.validate();
+		playerTwoStones.repaint();
        
     }
 
     public void addPits()
     {
+    	pitPanel.removeAll();
         //Creates an overarching pit panel that holds 12 JPanels within it
-        pitPanel = new JPanel();
         pitPanel.setSize(300,475);
         pitPanel.setLayout(new GridLayout(2,6,5,5));
 
@@ -147,7 +153,8 @@ public class Board implements ImageObserver {
             }
         }
         //Adds pits to the center
-        frame.add(pitPanel,BorderLayout.CENTER);
+        pitPanel.validate();
+        pitPanel.repaint();
     }
 
     /**
