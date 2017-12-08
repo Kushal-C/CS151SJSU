@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 
 import javax.swing.event.ChangeEvent;
@@ -71,8 +69,8 @@ public class Game {
 		pits[whichPlayer][pit] = 0;
 		while(stonesToBeMoved > 0){
 			if(whichPlayer == 0){
-				if(++pit >= 6){
-					pit = 5;
+				if(--pit < 0){
+					pit = 0;
 					--stonesToBeMoved;
 					++endPits[whichPlayer];
 					
@@ -89,8 +87,8 @@ public class Game {
 				--stonesToBeMoved;
 			}
 			else{
-				if(--pit < 0){
-					pit = 0;
+				if(++pit >= 6){
+					pit = 5;
 					--stonesToBeMoved;
 					++endPits[whichPlayer];
 					
