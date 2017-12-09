@@ -4,7 +4,10 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-//This is our model class
+/**
+ * Model Class of the Project Mancala
+ * @author Ruben Tapia
+ */
 public class Game {
 	
 	//Two sets of pits for each player, player 1 represented by pits [0][*] player 2 represented by pits [1][*]
@@ -55,12 +58,14 @@ public class Game {
 			throw new IllegalArgumentException("Wrong players turn.");
 		}
 
+		//If the pit is empty, nothing occurs
 		if(pits[whichPlayer][pit]==0){
 			return;
 		}
 
 		resetAll();
-
+		
+		//If player getsFreeTurn, resets undos
 		if(getsFreeTurn == true){
 			undoCounter[whichPlayer] = 0;
 			getsFreeTurn = false;
@@ -70,11 +75,14 @@ public class Game {
 			currentUndoer = whichPlayer;
 		}
 
+		//Takes all stones out of pit selected and move them accordingly
 		undo = true;
 		int stonesToBeMoved = pits[whichPlayer][pit];
 		pits[whichPlayer][pit] = 0;
 		while(stonesToBeMoved > 0){
+			//Iterates to the left if top player for counterclockwise effect
 			if(whichPlayer == 0){
+				//Adds to endpit if switching sides
 				if(--pit < 0){
 					pit = 0;
 					--stonesToBeMoved;
@@ -92,7 +100,9 @@ public class Game {
 				++pits[whichPlayer][pit];
 				--stonesToBeMoved;
 			}
+			//Iterates to the right if bottom player for counterclockwise effect
 			else{
+				//Adds to endpit if switching sides
 				if(++pit >= 6){
 					pit = 5;
 					--stonesToBeMoved;
@@ -117,6 +127,7 @@ public class Game {
 
 	/**
 	 * Undo method which updates undo counter and checks logic
+	 * Uses clone to keep track of 2D array
 	 */
 	public void undo(){
 		if (getGame()||undo == false||(currentPlayer == currentUndoer && undo == false)||(undoCounter[currentUndoer] == MaxUndos)){
@@ -137,10 +148,12 @@ public class Game {
 
 	/**
 	 * Updates the games and moves stones to appropriate pits
+	 * Checks if the players last stone lands on an empty pit, if so take stones and grants free turn
 	 * @param whichPlayer is the player ending turn
 	 * @param pit is the pit chosen
 	 */
 	private void endTurn(int whichPlayer, int pit){
+		//This if checks for other getFreeTurn Condidtion
 		if (whichPlayer == currentPlayer && pits[whichPlayer][pit] == 1){
 			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][pit];
 			pits[whichPlayer][pit] = 0;
@@ -151,11 +164,10 @@ public class Game {
 			currentPlayer = switchPlayer(currentPlayer);
 		}
 		arePitsEmpty();
-//		updateAll();
 	}
 
 	/**
-	 * Checks if all pits are empty to end game
+	 * Checks if all pits are empty to end game by iterating thorugh the pits of each players side
 	 * @return true if pits are empty false if not
 	 */
 	private boolean arePitsEmpty(){
@@ -179,6 +191,7 @@ public class Game {
 	/**
 	 * Moves remaining stones to appropriate endPits
 	 * @param whichPlayer is the player whose turn the game ended on
+	 * Displays the name of the winner of the game
 	 */
 	public void endGame(int whichPlayer){
 		isGameOver = true;
