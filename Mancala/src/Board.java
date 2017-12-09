@@ -60,13 +60,13 @@ public class Board{
         playerTwoStones.setMinimumSize(new Dimension(100,475));
    
         int[] endPits = model.getEndPits();
-        for (int i = 0; i < endPits[1]; i ++) {
+        for (int i = 0; i < endPits[0]; i ++) {
         	Stone stone = new Stone(model);
     	    stone.setSize(50,50);
     		playerOneStones.add(stone);
         }
         
-        for (int i = 0; i < endPits[0]; i ++) {
+        for (int i = 0; i < endPits[1]; i ++) {
         	Stone stone = new Stone(model);
     	    stone.setSize(50,50);
     		playerTwoStones.add(stone);
