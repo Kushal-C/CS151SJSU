@@ -142,9 +142,9 @@ public class Game {
 	 */
 	private void endTurn(int whichPlayer, int pit){
 		if (whichPlayer == currentPlayer && pits[whichPlayer][pit] == 1){
-			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][6 - pit - 1];
+			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][pit];
 			pits[whichPlayer][pit] = 0;
-			pits[switchPlayer(whichPlayer)][6 - pit - 1] = 0;
+			pits[switchPlayer(whichPlayer)][pit] = 0;
 			getsFreeTurn = true;
 		}
 		else{
@@ -256,4 +256,3 @@ public class Game {
 		return playerTwoName;
 	}
 }
-
