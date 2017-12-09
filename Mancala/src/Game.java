@@ -193,7 +193,10 @@ public class Game {
 
 		if(endPits[currentPlayer] < endPits[switchPlayer(currentPlayer)]){
 			currentPlayer = switchPlayer(currentPlayer);
-			JOptionPane.showMessageDialog(null, "The winner is" + currentPlayer);
+			if(currentPlayer == 0)
+				JOptionPane.showMessageDialog(null, "The winner is" + playerOneName);
+			else
+				JOptionPane.showMessageDialog(null, "The winner is" + playerTwoName);
 			return;
 		}
 	}
@@ -253,3 +256,4 @@ public class Game {
 		return playerTwoName;
 	}
 }
+
