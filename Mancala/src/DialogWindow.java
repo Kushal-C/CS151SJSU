@@ -5,8 +5,10 @@ import java.awt.event.*;
 import javax.swing.*;
 
 /**
- * A dialog to allow player to set initial stone count
- * and a board layout to be used for game play
+ * The controller class for the entire program. On launch it pops up a dialog which contains all the fields
+ * necessary to setup a game of mancala.
+ * 
+ * @authors Tien Nguyen, Kushalkumar Cuttari
  *
  */
 public class DialogWindow extends JDialog
@@ -18,10 +20,16 @@ public class DialogWindow extends JDialog
 		DialogWindow window = new DialogWindow();
 	}
 	
+	/**
+	 * Calls the popup method on initialization
+	 */
 	public DialogWindow() {
 		popup();
 	}
 	
+	/**
+	 * Shows a dialog window on the screen with all the fields necessary to start the game.
+	 */
 	public void popup() {
 		JTextField name1 = new JTextField();
 		JTextField name2 = new JTextField();
@@ -49,10 +57,18 @@ public class DialogWindow extends JDialog
 		b = new Board(model, lt);
 	}
 	
+	/**
+	 * Returns the Game model initialized in popup
+	 * @return Game
+	 */
 	public Game getModel() {
 		return model;
 	}
 	
+	/**
+	 * Returns the Board initialized in popup
+	 * @return Board
+	 */
 	public Board getBoard() {
 		return b;
 	}

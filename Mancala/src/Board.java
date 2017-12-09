@@ -6,8 +6,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 
-//This is our view
-public class Board{
+/**
+ * The View of our class, displays the entire Mancala board and sends information back to the model through
+ * the use of listeners
+ * @authors Kushalkumar Cuttari, Tien Nguyen
+ *
+ */
+public class Board {
 
     JFrame frame;
 
@@ -18,9 +23,13 @@ public class Board{
     Image background;
     Game model;
     LayoutTemplate layout;
-   // TODO:switch from BorderLayout to gridsBagLayout
-    public Board(Game model, LayoutTemplate lt)
-    {
+   
+    /**
+     * Takes in a model object and a theme object and initializes the board and its appearance
+     * @param model
+     * @param lt
+     */
+    public Board(Game model, LayoutTemplate lt) {
         frame = new JFrame();
         frame.setSize(500,500);
         frame.setLayout(new BorderLayout());
@@ -43,8 +52,12 @@ public class Board{
         frame.setVisible(true);
     }
   
-    public void addEndPanels()
-    {
+    /**
+     * Helper method used to break the code into manageable chunks. This method is used to add the end pits 
+     * of both players to the mancala board.
+     */
+    public void addEndPanels() {
+    	
         playerOneStones.removeAll();
         playerTwoStones.removeAll();
         playerOneStones.setLayout(new GridLayout(0,1));
@@ -79,8 +92,10 @@ public class Board{
         frame.setVisible(true);
     }
 
-    public void addPits()
-    {
+    /**
+     * Helper method to add all the pits to the mancala board as well as hold all the listeners
+     */
+    public void addPits() {
     	pitPanel.removeAll();
         //Creates an overarching pit panel that holds 12 JPanels within it
         pitPanel.setSize(300,475);
@@ -162,7 +177,7 @@ public class Board{
     }
 
     /**
-     * Adds buttons to the overlying panel
+     * Helper method to add buttons to the overlying panel and set their listeners to perform a certain task.
      */
     public void addButtons()
     {

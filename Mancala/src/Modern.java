@@ -8,9 +8,18 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
+/**
+ * Template for a modern styling of the game
+ * @author Tien Nguyen
+ *
+ */
 public class Modern extends LayoutTemplate{
 	BufferedImage background;
+	
+	/**Returns the background image to be used in styling the board, used only when initially loading the background
+	 * file.
+	 * @return BufferedImage
+	 */
 	@Override
 	public BufferedImage setBackground() {
 		// TODO Auto-generated method stub
@@ -23,12 +32,19 @@ public class Modern extends LayoutTemplate{
 		return background;
 	}
 
+	/**
+	 * Returns the background image to be used
+	 * @return Image
+	 */
 	@Override
 	public Image getImage() {
 		// TODO Auto-generated method stub
 		return background;
 	}
 	
+	/**
+	 * Overridden paint component which contains the styling details
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -36,6 +52,11 @@ public class Modern extends LayoutTemplate{
 		g2.setColor(Color.GREEN);
 		g2.fillRect(10, 10, 10, 10);
 	}
+	
+	/**
+	 * Returns a Dimension object with the parameters 20,20
+	 * @return Dimension
+	 */
 	public Dimension getPreferredSize() {
 		return new Dimension(20, 20); 
 	}

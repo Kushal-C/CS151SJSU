@@ -5,7 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * Model Class of the Project Mancala
+ * Model Class of the Project Mancala. Controls all the logic for the entirety of the game
  * @author Ruben Tapia
  */
 public class Game {
@@ -236,35 +236,74 @@ public class Game {
 		}
 	}
 
-
+	/**
+	 * Returns a clone of the pits
+	 * @return int[][]
+	 */
 	public int[][] getPits(){
 		return pits.clone();
 	}
 
+	/**
+	 * Returns the number of Undos left for a player
+	 * @return int
+	 */
 	public int getNumberofUndos(){
 		return MaxUndos - undoCounter[currentUndoer];
 	}
 
+	/**
+	 * Returns a clone of the end pits
+	 * @return int[]
+	 */
 	public int[] getEndPits(){
 		return endPits.clone();
 	}
 
+	/**
+	 * Returns which players turn it is currently.
+	 * @return int
+	 */
 	public int getCurrentPlayer(){
 		return currentPlayer + 1;
 	}
-
+	
+	/**
+	 * Returns whether or not the game is over
+	 * @return boolean
+	 */
 	public boolean getGame(){
 		return isGameOver;
 	}
+	
+	/**
+	 * Returns the number of stones used to start the game
+	 * @return int
+	 */
 	public int getStartingStones() {
 		return startingStones;
 	}
+	
+	/**
+	 * Returns the theme of game.
+	 * @return String
+	 */
 	public String getTheme() {
 		return theme;
 	}
+	
+	/**
+	 * Returns player one's name
+	 * @return String
+	 */
 	public String getPlayerOneName() {
 		return playerOneName;
 	}
+	
+	/**
+	 * Returns player two's name
+	 * @return String
+	 */
 	public String getPlayerTwoName() {
 		return playerTwoName;
 	}
