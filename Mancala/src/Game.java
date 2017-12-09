@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -192,6 +193,7 @@ public class Game {
 
 		if(endPits[currentPlayer] < endPits[switchPlayer(currentPlayer)]){
 			currentPlayer = switchPlayer(currentPlayer);
+			JOptionPane.showMessageDialog(null, "The winner is" + currentPlayer);
 			return;
 		}
 	}
