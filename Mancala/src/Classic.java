@@ -31,9 +31,6 @@ public class Classic extends LayoutTemplate{
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setBackground();
-		g.drawImage(background, 3, 4, this);
-		
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawOval(10, 10, 10, 10);
 		g2.setColor(Color.RED);

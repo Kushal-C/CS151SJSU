@@ -110,7 +110,12 @@ public class Board extends JPanel{
                 		stonePanel.add(layout);
                 	}
                 }
-            	
+            	if (model.getTheme().equals("Classic")) {
+            		pit.setBackground(Color.BLUE);
+            	}
+            	else {
+            		pit.setBackground(Color.ORANGE);
+            	}
                 pit.add(stonePanel);
                 
                 pitPanel.add(pit);
