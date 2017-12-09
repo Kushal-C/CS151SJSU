@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Classic extends LayoutTemplate{
+public class Modern extends LayoutTemplate{
 	BufferedImage background;
 	@Override
 	public BufferedImage setBackground() {
@@ -31,13 +31,10 @@ public class Classic extends LayoutTemplate{
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		setBackground();
-		g.drawImage(background, 3, 4, this);
-		
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawOval(10, 10, 10, 10);
-		g2.setColor(Color.RED);
-		g2.fillOval(10, 10, 10, 10);
+		g2.drawRect(10, 10, 10, 10);
+		g2.setColor(Color.GREEN);
+		g2.fillRect(10, 10, 10, 10);
 	}
 	public Dimension getPreferredSize() {
 		return new Dimension(20, 20); 

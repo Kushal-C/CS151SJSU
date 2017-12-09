@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 
 //This is our view
 public class Board extends JPanel{
@@ -60,13 +61,13 @@ public class Board extends JPanel{
         playerTwoStones.setMinimumSize(new Dimension(100,475));
    
         int[] endPits = model.getEndPits();
-        for (int i = 0; i < endPits[0]; i ++) {
+        for (int i = 0; i < endPits[1]; i ++) {
         	Stone stone = new Stone(model);
     	    stone.setSize(50,50);
     		playerOneStones.add(stone);
         }
         
-        for (int i = 0; i < endPits[1]; i ++) {
+        for (int i = 0; i < endPits[0]; i ++) {
         	Stone stone = new Stone(model);
     	    stone.setSize(50,50);
     		playerTwoStones.add(stone);
@@ -98,9 +99,16 @@ public class Board extends JPanel{
                 JPanel stonePanel = new JPanel();
                 int [][] tempPits = model.getPits();
                 for (int k = 0; k < tempPits[i][j]; k++) {
-                	layout = new Classic();
-            	    layout.setSize(50,50);
-            		stonePanel.add(layout);
+                	if (model.getTheme().equals("Classic")) {
+                    	layout = new Classic();
+                	    layout.setSize(50,50);
+                		stonePanel.add(layout);
+                	}
+                	else {
+                    	layout = new Modern();
+                	    layout.setSize(50,50);
+                		stonePanel.add(layout);
+                	}
                 }
             	
                 pit.add(stonePanel);
@@ -112,17 +120,6 @@ public class Board extends JPanel{
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						model.playGame(pit.getRow(), pit.getCol());
-		
-						int[][] temp = model.getPits();
-					
-						for(int i = 0; i < 2; i++)
-						{
-							for(int j = 0; j < 6; j++)
-							{
-								System.out.print(temp[i][j] + " ");
-							}
-							System.out.println();
-						}
 						addPits();
 						addEndPanels();
 					}

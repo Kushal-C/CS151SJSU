@@ -42,7 +42,10 @@ public class DialogWindow extends JDialog
 		LayoutTemplate lt = new Classic();
 		String themeTemp = theme.getText();
 		
-		model = new Game(s, themeTemp);
+		
+		String playerOneName = name1.getText();
+		String playerTwoName = name1.getText();
+		model = new Game(s, themeTemp, playerOneName, playerTwoName);
 		b = new Board(model, lt);
 	}
 	

@@ -22,13 +22,18 @@ public class Game {
 	private int currentUndoer = 0;
 	private int startingStones;
 	private String theme;
+	private String playerOneName;
+	private String playerTwoName;
+
 	/**
 	 * Start of the game placing stones into pits
 	 * @param NumberofStones is the number of stones going to be played
 	 */
-	public Game(int NumberofStones, String theme2){
+	public Game(int NumberofStones, String theme2, String playerOne, String playerTwo){
 		this.theme = theme2;
 		this.startingStones = NumberofStones;
+		this.playerOneName = playerOne;
+		this.playerTwoName = playerTwo;
 		for(int i = 0; i<2; i++){
 			endPits[i] = 0;
 			undoCounter[i] = 0;
@@ -238,5 +243,11 @@ public class Game {
 	}
 	public String getTheme() {
 		return theme;
+	}
+	public String getPlayerOneName() {
+		return playerOneName;
+	}
+	public String getPlayerTwoName() {
+		return playerTwoName;
 	}
 }
