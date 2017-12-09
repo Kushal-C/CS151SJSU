@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 
 //This is our view
-public class Board extends JPanel{
+public class Board{
 
     JFrame frame;
 
@@ -74,10 +73,10 @@ public class Board extends JPanel{
         }
 		playerOneStones.validate();
 		playerOneStones.repaint();
-		
+        
 		playerTwoStones.validate();
 		playerTwoStones.repaint();
-       
+        frame.setVisible(true);
     }
 
     public void addPits()
@@ -159,6 +158,7 @@ public class Board extends JPanel{
         //Adds pits to the center
         pitPanel.validate();
         pitPanel.repaint();
+        frame.setVisible(true);
     }
 
     /**
@@ -227,13 +227,4 @@ public class Board extends JPanel{
     		});
     		
     	}
-    public void addingStonesToPanel() {
-    	
-    }
-
-	@Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
