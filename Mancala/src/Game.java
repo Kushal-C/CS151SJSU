@@ -142,9 +142,9 @@ public class Game {
 	 */
 	private void endTurn(int whichPlayer, int pit){
 		if (whichPlayer == currentPlayer && pits[whichPlayer][pit] == 1){
-			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][6 - pit - 1];
+			endPits[whichPlayer] += 1 + pits[switchPlayer(whichPlayer)][pit];
 			pits[whichPlayer][pit] = 0;
-			pits[switchPlayer(whichPlayer)][6 - pit - 1] = 0;
+			pits[switchPlayer(whichPlayer)][pit] = 0;
 			getsFreeTurn = true;
 		}
 		else{
@@ -193,7 +193,10 @@ public class Game {
 
 		if(endPits[currentPlayer] < endPits[switchPlayer(currentPlayer)]){
 			currentPlayer = switchPlayer(currentPlayer);
-			JOptionPane.showMessageDialog(null, "The winner is" + currentPlayer);
+			if(currentPlayer == 0)
+				JOptionPane.showMessageDialog(null, "The winner is" + playerOneName);
+			else
+				JOptionPane.showMessageDialog(null, "The winner is" + playerTwoName);
 			return;
 		}
 	}
